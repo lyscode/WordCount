@@ -1,43 +1,43 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS //因为我这里是vs的运行环境
 #include<stdio.h>
 #include<string.h>
 int main() {
-	//�����ļ�������
+	//定义文件的数组
 	char name[20];
-	//����ͳ���ַ����ǵ��ʵ�����
+	//定义统计字符还是单词的数组
 	char str[3];
-	//����-w����-c,���ļ��е�ȫ��
+	//输入-w或者-c,和文件夹的全名
 	scanf("%s%s", str, name);
 	FILE  *f = fopen(name, "r");
-	//����txt���鱣���ļ�������
+	//定义txt数组保存文件的数据
 	char txt[100];
 	int count = 0, i = 0;
 	char c;
-	//���ļ���ֱ��ĩβ
+	//读文件，直到末尾
 	while (!feof(f))
 	{
-		//���ļ����ݸ�ֵc
+		//将文件内容赋值c
 		c = fgetc(f);
-		//��c��ֵ������
+		//将c赋值给数组
 		txt[i] = c;
 		i++;
 		count++;
 	}
-	//��Ϊ��β����
+	//因为结尾不算
 	count--;
 	int n = 0, flag = 0;
-	//ͳ���ַ�
+	//统计字符
 	if (strcmp(str, "-c") == 0)
 	{
-		printf("�ַ���:%d\n", count);
+		printf("字符数:%d\n", count);
 	}
-	//ͳ�Ƶ���
+	//统计单词
 	else
 	{
-		//�������������
+		//遍历保存的数据
 		for (i = 0; i<count; i++)
 		{
-			//��������ո񣬶���,���߻��зֿ��ģ�����Ϊһ������
+			//如果遇到空格，逗号,或者换行分开的，都视为一个单词
 			if (txt[i] == ' ' || txt[i] == '\n' || txt[i] == '\t' || txt[i] == ',')
 				flag = 0;
 			else if (flag == 0)
@@ -46,6 +46,6 @@ int main() {
 				n++;
 			}
 		}
-		printf("������:%d\n", n);
+		printf("单词数:%d\n", n);
 	}
 }
